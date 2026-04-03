@@ -1,0 +1,154 @@
+/* Component CSS - Transactions Hub */
+
+.page-transactions {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.transactions-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+@media (max-width: 480px) {
+    .transactions-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+}
+
+/* Household Pill Toggle */
+.pill-toggle {
+    display: flex;
+    background-color: var(--card-bg);
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    padding: 4px;
+}
+
+.pill-btn {
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--text-muted);
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.pill-btn.active {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* CSV Export Mechanism */
+.btn-export {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    font-family: var(--font-body);
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+.btn-export:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+.btn-export i { font-size: 1.25rem; }
+
+/* Table Layout Container */
+.transactions-full-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.transactions-table { width: 100%; border-collapse: collapse; }
+.transactions-table th {
+    text-align: left; padding: 16px 24px; font-size: 0.85rem; text-transform: uppercase;
+    color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; border-bottom: 2px solid var(--border-color);
+}
+.transactions-table td {
+    padding: 18px 24px; font-size: 0.95rem; border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+.transactions-table tbody tr { transition: background-color 0.2s ease; }
+
+/* Elegant hover highlighting logic matching design brief */
+.transactions-table tbody tr:hover {
+    background-color: #FBF5E6; /* Light Gold Tint */
+}
+[data-theme="dark"] .transactions-table tbody tr:hover {
+    background-color: rgba(201, 168, 76, 0.12); /* Equivalent dark overlay */
+}
+
+.amount-col { text-align: right; font-weight: 600; color: var(--text-color); }
+.transactions-table td i {
+    color: var(--text-muted); margin-right: 8px; font-size: 1.1rem; vertical-align: middle;
+}
+
+/* User Identity Badges (SR, MK, JL) */
+.user-badge {
+    background-color: rgba(26,26,46,0.05);
+    color: var(--text-color);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 12px;
+    display: inline-block;
+    border: 1px solid var(--border-color);
+}
+[data-theme="dark"] .user-badge { background-color: rgba(255,255,255,0.05); }
+
+/* Null States */
+.empty-state {
+    padding: 64px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    text-align: center;
+}
+.empty-state p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.btn-primary-small {
+    background-color: var(--accent-color); color: #FFF; text-decoration: none; padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 0.9rem; transition: background-color 0.2s;
+}
+.btn-primary-small:hover { background-color: #B59540; }
+
+/* Totals */
+.table-footer-summary {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 12px;
+    font-size: 1.05rem;
+    color: var(--text-muted);
+}
+.table-footer-summary strong {
+    color: var(--text-color);
+    font-size: 1.25rem;
+    margin-left: 8px;
+}

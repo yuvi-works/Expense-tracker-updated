@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Ledger</title>
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons & Charts -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Global Layout & Component Styles -->
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%231A1A2E"/><text x="50" y="70" font-family="serif" font-size="65" font-weight="bold" fill="%23C9A84C" text-anchor="middle">L</text></svg>'><script>if(localStorage.getItem('ledger-theme')==='dark'){document.documentElement.setAttribute('data-theme', 'dark');}</script><link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="layout">
+        <!-- Persistent Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="logo">Ledger</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="ph ph-squares-four"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="add-expense.html" class="nav-item">
+                    <i class="ph ph-plus-circle"></i>
+                    <span>Add Expense</span>
+                </a>
+                <a href="transactions.html" class="nav-item">
+                    <i class="ph ph-list-dashes"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="insights.html" class="nav-item">
+                    <i class="ph ph-chart-line-up"></i>
+                    <span>Insights</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="settings.html" class="nav-item">
+                    <i class="ph ph-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <header class="page-header">
+                <h1>Good morning, Sarah</h1>
+                <p>Here's your financial snapshot for March 2026</p>
+            </header>
+
+            <!-- Info Strip -->
+            <div class="info-strip">
+                <i class="ph-fill ph-map-pin"></i>
+                <span>Your rent is 38% of income — Irish average is 32%</span>
+            </div>
+
+            <!-- Summary Cards Row (5 columns) -->
+            <section class="summary-cards">
+                <div class="card summary-card">
+                    <span class="card-label">Total Budget</span>
+                    <span class="card-value count-up">€2,500</span>
+                </div>
+                <div class="card summary-card">
+                    <span class="card-label">Spent This Month</span>
+                    <span class="card-value count-up">€1,840</span>
+                </div>
+                <div class="card summary-card">
+                    <span class="card-label">Remaining</span>
+                    <span class="card-value count-up">€660</span>
+                </div>
+                <div class="card summary-card">
+                    <span class="card-label">Savings Rate</span>
+                    <span class="card-value count-up">26%</span>
+                </div>
+                <div class="card summary-card">
+                    <span class="card-label">🌧️ Rainy Day Fund</span>
+                    <span class="card-value">€420 <span style="font-size: 0.9rem; color: var(--text-muted); font-weight: 500;">/ €1,000</span></span>
+                    <div class="progress-wrap"><div class="progress-fill" style="width: 42%;"></div></div>
+                </div>
+            </section>
+
+            <!-- Data Visualizations -->
+            <section class="charts-area">
+                <!-- Donut Chart -->
+                <div class="card chart-card">
+                    <h3>Spending by Category</h3>
+                    <div class="chart-container donut-container">
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Line Chart -->
+                <div class="card chart-card">
+                    <h3>Spending Trend</h3>
+                    <div class="chart-container line-container">
+                        <canvas id="trendChart"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions Table -->
+            <section class="transactions-area">
+                <div class="card transactions-card">
+                    <div class="transactions-header">
+                        <h3>Recent Transactions</h3>
+                        <a href="transactions.html" class="view-all">View All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="transactions-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th class="amount-col">Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Mar 24, 2026</td>
+                                    <td><i class="ph ph-shopping-cart"></i> Groceries</td>
+                                    <td>Whole Foods Market</td>
+                                    <td class="amount-col">€85.20</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 22, 2026</td>
+                                    <td><i class="ph ph-film-strip"></i> Entertainment</td>
+                                    <td>Netflix Subscription</td>
+                                    <td class="amount-col">€15.99</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 20, 2026</td>
+                                    <td><i class="ph ph-train"></i> Transport</td>
+                                    <td>City Transit Pass</td>
+                                    <td class="amount-col">€45.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 18, 2026</td>
+                                    <td><i class="ph ph-house"></i> Rent</td>
+                                    <td>Monthly Rent</td>
+                                    <td class="amount-col">€1,200.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Mar 15, 2026</td>
+                                    <td><i class="ph ph-heartbeat"></i> Health</td>
+                                    <td>Pharmacy</td>
+                                    <td class="amount-col">€32.50</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Central Navigation Script -->
+    <!-- API & Auth Layer -->
+    <script src="js/aws-config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <script src="navigation.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
+

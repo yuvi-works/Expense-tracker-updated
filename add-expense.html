@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense - Ledger</title>
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Shared base styles and unique layout -->
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%231A1A2E"/><text x="50" y="70" font-family="serif" font-size="65" font-weight="bold" fill="%23C9A84C" text-anchor="middle">L</text></svg>'><script>if(localStorage.getItem('ledger-theme')==='dark'){document.documentElement.setAttribute('data-theme', 'dark');}</script><link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="add-expense.css">
+</head>
+<body>
+    <div class="layout">
+        <!-- Persistent Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="logo">Ledger</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="nav-item">
+                    <i class="ph ph-squares-four"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="add-expense.html" class="nav-item active">
+                    <i class="ph ph-plus-circle"></i>
+                    <span>Add Expense</span>
+                </a>
+                <a href="transactions.html" class="nav-item">
+                    <i class="ph ph-list-dashes"></i>
+                    <span>Transactions</span>
+                </a>
+                <a href="insights.html" class="nav-item">
+                    <i class="ph ph-chart-line-up"></i>
+                    <span>Insights</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="settings.html" class="nav-item">
+                    <i class="ph ph-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content form-page">
+            <!-- For dark mode icon injection -->
+            <header class="page-header" style="height:0; margin:0; padding:0; position:absolute; right:0; top:0;"></header>
+
+            <div class="expense-card card">
+                
+                <header class="form-header">
+                    <h1>Log an Expense</h1>
+                </header>
+
+                <!-- Quick Add Bar -->
+                <div class="quick-add-bar">
+                    <input type="number" id="quick-amount" placeholder="€0.00" step="0.01">
+                    <div class="quick-select-wrap">
+                        <select id="quick-category">
+                            <option value="groceries">🛒</option>
+                            <option value="rent">🏠</option>
+                            <option value="transport">🚗</option>
+                            <option value="entertainment">🎬</option>
+                            <option value="health">💊</option>
+                            <option value="other">📦</option>
+                        </select>
+                        <i class="ph ph-caret-down"></i>
+                    </div>
+                    <button id="btn-quick-add" class="btn-quick-add"><i class="ph ph-plus"></i></button>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Main Form -->
+                <form id="expense-form" class="expense-form" onsubmit="event.preventDefault();">
+                    
+                    <div class="form-group amount-group">
+                        <label for="amount">Amount (€)</label>
+                        <div class="amount-input-wrapper">
+                            <span class="currency-symbol">€</span>
+                            <input type="number" id="amount" class="amount-input" placeholder="0.00" step="0.01" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        <div class="select-wrapper">
+                            <select id="category" class="standard-input" required>
+                                <option value="" disabled selected>Select a category...</option>
+                                <option value="groceries">🛒 Groceries</option>
+                                <option value="rent">🏠 Rent/Mortgage</option>
+                                <option value="transport">🚗 Transport</option>
+                                <option value="entertainment">🎬 Entertainment</option>
+                                <option value="health">💊 Health</option>
+                                <option value="other">📦 Other</option>
+                            </select>
+                            <i class="ph ph-caret-down select-icon"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Description (Optional)</label>
+                        <input type="text" id="description" class="standard-input" placeholder="What was this for? (e.g. Tesco, Netflix)">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" class="standard-input" required>
+                    </div>
+
+                    <div class="form-group payment-group">
+                        <label>Payment Method</label>
+                        <div class="radio-options">
+                            <label class="radio-label">
+                                <input type="radio" name="payment-method" value="cash" required>
+                                <span class="radio-custom"></span> Cash
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="payment-method" value="card">
+                                <span class="radio-custom"></span> Card
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="payment-method" value="bank">
+                                <span class="radio-custom"></span> Bank Transfer
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Recurring Toggle -->
+                    <div class="form-group recurring-group">
+                        <label class="toggle-switch-wrap">
+                            <div class="switch">
+                                <input type="checkbox" id="repeat-monthly">
+                                <span class="slider round"></span>
+                            </div>
+                            <span style="font-weight: 500; font-size: 0.95rem; color: var(--text-color);">🔄 Repeat monthly</span>
+                        </label>
+                    </div>
+
+                    <!-- Success Banner (Hidden by default) -->
+                    <div id="success-banner" class="success-banner" style="display: none;">
+                        <i class="ph-fill ph-check-circle" style="color: #5C8A69; font-size: 1.5rem;"></i> 
+                        <span style="color: #5C8A69; font-weight: 600;">Expense saved!</span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary-large">Save Expense</button>
+                        <a href="dashboard.html" class="btn-cancel">Cancel</a>
+                    </div>
+                </form>
+            </div>
+            
+            <p style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-top: 16px;">Tip: Press <kbd style="background: var(--card-bg); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color);">N</kbd> anywhere to focus the Amount field.</p>
+        </main>
+    </div>
+    
+    <!-- API & Auth Layer -->
+    <script src="aws-config.js"></script>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+
+    <script src="navigation.js"></script>
+    <script src="add-expense.js"></script>
+</body>
+</html>
+

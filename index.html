@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ledger - Private Household Budget Tracker</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    
+    <!-- Core UI & Component Styles -->
+    <link rel="icon" type="image/svg+xml" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" rx="20" fill="%231A1A2E"/><text x="50" y="70" font-family="serif" font-size="65" font-weight="bold" fill="%23C9A84C" text-anchor="middle">L</text></svg>'><script>if(localStorage.getItem('ledger-theme')==='dark'){document.documentElement.setAttribute('data-theme', 'dark');}</script><link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Minimal header to anchor the dark mode moon toggle -->
+        <header class="page-header" style="height: 0; padding: 0; margin: 0;"></header>
+        
+        <div class="card responsive-card">
+            <div class="header">
+                <h1 class="logo">Ledger</h1>
+                <p class="tagline">Your finances. Privately yours.</p>
+            </div>
+            
+            <div class="tabs">
+                <button class="tab active" id="tab-login" onclick="switchTab('login')">Login</button>
+                <button class="tab" id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="login-form" class="form active">
+                <div class="input-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" placeholder="you@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                </div>
+                
+                <!-- Cloud/Local Toggle -->
+                <div class="storage-toggle-wrap">
+                    <span class="storage-label">Local Storage</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider round"></span>
+                    </label>
+                    <span class="storage-label active-cloud">Cloud Sync</span>
+                </div>
+
+                <button type="submit" class="btn-primary">Sign In</button>
+            </form>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="form">
+                <div class="input-group">
+                    <label for="signup-name">Name</label>
+                    <input type="text" id="signup-name" placeholder="Alex Doe" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" placeholder="you@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" placeholder="••••••••" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-confirm">Confirm Password</label>
+                    <input type="password" id="signup-confirm" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-primary">Create Account</button>
+            </form>
+
+            <!-- Expandable Data Policy -->
+            <details class="data-policy">
+                <summary>How we store your data <i class="ph ph-caret-down"></i></summary>
+                <ul class="policy-list">
+                    <li><i class="ph-fill ph-lock-key"></i> Encrypted with AWS Cognito</li>
+                    <li><i class="ph-fill ph-prohibit"></i> No tracking cookies</li>
+                    <li><i class="ph-fill ph-globe-hemisphere-east"></i> GDPR compliant structure</li>
+                </ul>
+            </details>
+
+            <div class="footer">
+                <p>Your data is never shared or sold.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- API & Auth Layer -->
+    <script src="aws-config.js"></script>
+    <script src="api.js"></script>
+    <script src="auth.js"></script>
+
+    <!-- Central Navigation Script -->
+    <script src="navigation.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
